@@ -343,7 +343,303 @@
             display: block;
             margin-top: 10px;
         }
+/* Стилі для каруселі побажань */
+        .carousel-wrapper {
+            position: relative;
+            max-width: 650px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 20px;
+            padding: 10px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.45s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 10px 15px;
+        }
+
+        .carousel-slide .detail-card {
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        /* Кнопки-стрілки */
+        .carousel-btn {
+            background-color: #fff;
+            border: 1px solid var(--sage-main);
+            color: var(--sage-dark);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--sage-main);
+            color: #fff;
+            box-shadow: 0 6px 15px rgba(132, 155, 135, 0.4);
+        }
+
+        .prev-btn { left: -22px; }
+        .next-btn { right: -22px; }
+
+        /* Крапочки-індикатори знизу */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--sage-light);
+            border: 1px solid var(--sage-main);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--sage-main);
+            width: 26px;
+            border-radius: 10px;
+        }
+/* Стилі для вертикального розкладу (Таймлайн) */
+        /* Підложка програми дня */
+        .timeline-section {
+            background-color: var(--sage-light);
+            border-radius: 40px;
+            margin: 40px auto;
+            padding: 70px 25px;
+            max-width: 800px;
+            /* Наступні два рядки центрують весь розклад як єдиний блок */
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 40px;
+            width: max-content; /* Змушуємо блок бути рівно такої ширини, як текст */
+            max-width: 100%;
+        }
+
+        /* Центральна вертикальна лінія */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            bottom: 8px;
+            left: 100px; /* Фіксована позиція лінії */
+            width: 1.5px;
+            background-color: var(--sage-main);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Час (ліва колонка) */
+        .timeline-time {
+            width: 100px; /* Фіксована ширина для часу */
+            text-align: right;
+            padding-right: 30px;
+            font-family: var(--font-heading);
+            font-size: 1.7rem;
+            color: var(--sage-dark);
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+
+        /* Опис події (права колонка) */
+        .timeline-content {
+            text-align: left;
+            padding-left: 30px;
+            max-width: 340px; /* Обмежуємо ширину тексту, щоб він виглядав зібрано */
+        }
+
+        .timeline-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--sage-dark);
+            margin: 0 0 4px 0;
+            line-height: 1.2;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Крапочка на лінії */
+        .timeline-dot {
+            position: absolute;
+            left: 100px; /* Збігається з лінією */
+            top: 5px; 
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background-color: var(--sage-light);
+            border: 2px solid var(--sage-main);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        /* Текст-опис саме для розкладу (зменшуємо відступ знизу) */
+        .timeline-section .section-desc {
+            margin-bottom: 15px; /* Замість стандартних 50px */
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 10px; /* Зменшили з 40px до 10px */
+            width: max-content; 
+            max-width: 100%;
+        }
+        
+        /* Додати в блок <style> */
+.scroll-down-indicator {
+    position: absolute;
+    bottom: 35px; /* Відступ від нижнього краю */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: rgba(253, 251, 247, 0.75); /* Напівпрозорий білий */
+    font-size: 1.8rem;
+    animation: bounceScroll 2.2s infinite; /* Анімація */
+}
+
+@keyframes bounceScroll {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+        /* Адаптація під смартфони (як на референсі) */
+        @media (max-width: 650px) {
+            .timeline-section {
+                padding: 50px 15px;
+                border-radius: 30px;
+            }
+            .timeline::before {
+                left: 75px;
+                transform: none;
+            }
+            .timeline-dot {
+                left: 75px;
+                transform: translateX(-50%);
+            }
+            .timeline-time {
+                width: 75px;
+                padding-right: 18px;
+                font-size: 1.35rem;
+            }
+            .timeline-content {
+                width: calc(100% - 75px);
+                padding-left: 18px;
+            }
+            .timeline-content h3 {
+                font-size: 1.35rem;
+            }
+            .timeline-content p {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Адаптивність для телефонів */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+                transform: none;
+            }
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 30px;
+            }
+            .timeline-time {
+                width: 100%;
+                text-align: left;
+                padding-left: 50px;
+                padding-right: 0;
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+            .timeline-content {
+                width: 100%;
+                text-align: left;
+                padding-left: 50px;
+            }
+            .timeline-dot {
+                left: 20px;
+                top: 15px; /* Вирівнюємо крапку по висоті тексту часу */
+                transform: translateX(-50%);
+            }
+        }
+        @media (max-width: 768px) {
+            .prev-btn { left: -10px; }
+            .next-btn { right: -10px; }
+            .carousel-slide { padding: 10px 5px; }
+        }
         /* Адаптивність для мобільних пристроїв */
         @media (max-width: 768px) {
             .names { font-size: 3.5rem; }
@@ -370,6 +666,11 @@
             <h1 class="names">Анастасія <span>та</span> Дмитро</h1>
             <p class="hero-date">22 травня 2027</p>
         </div>
+
+        <div class="scroll-down-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+
     </header>
 
     <div class="main-content">
@@ -416,21 +717,70 @@
                     <h3>Коли</h3>
                     <p>22 травня 2027 року</p>
                     <p>Вінчання о 13:00</p>
-                    <p>Бенкет о 15:00</p>
+                    <p>Бенкет о 14:30</p>
                 </div>
                 <div class="detail-card">
-                    <i class="fa-solid fa-location-dot detail-icon"></i>
-                    <h3>Де</h3>
-                    <p><b>Вінчання</b> у церкві Пресвятої Трійці</p>
+                    <i class="fa-solid fa-church detail-icon"></i>
+                    <h3>Вінчання</h3>
+                    <p> у церкві Пресвятої Трійці</p>
                     <p>вул. Петра Адермаха, 1, Щирець</p>
-                    <p> <br></p>
-                    <p><b>Святкування</b> у ресторані «Острівок»</p>
+                </div>
+
+            <div class="detail-card">
+                    <i class="fa-solid fa-glass-cheers detail-icon"></i>
+                    <h3>Святкування</h3>
+                    <p> у ресторані «Острівок»</p>
                     <p>вул. Острівська, 193, Щирець</p>
                 </div>
             </div>
         </section>
 
-        <section>
+
+        <section class="timeline-section">
+            <h2 class="section-title">Програма дня</h2>
+            <p class="section-desc">Зберігайте розклад, щоб не пропустити найважливіші моменти нашого свята.</p>
+
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">13:00</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Вінчання</h3>
+                        <p>Церква Пресвятої Трійці<br>вул. Петра Адермаха, 1, Щирець</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">14:30</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Святковий бенкет</h3>
+                        <p>Зустріч гостей у ресторані «Острівок»<br>вул. Острівська, 193, Щирець</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">17:00</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Перший танець</h3>
+                        <p>Офіційне відкриття танцювального майданчика</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">21:00</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Весільний торт</h3>
+                        <p>Солодке завершення вечора та теплі розмови</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+       <!--  <section>
             <h2 class="section-title">Дрес-код</h2>
             <p class="section-desc">Нам буде дуже приємно, якщо ви підтримаєте колірну гаму нашого свята. Ми обрали природні, затишні відтінки зелені, кремового та бежевого.</p>
             <div class="dress-code-palette">
@@ -439,6 +789,57 @@
                 <div class="color-circle" style="background-color: #d4e0d7;"></div>
                 <div class="color-circle" style="background-color: #eaddcf;"></div>
                 <div class="color-circle" style="background-color: #fdfbf7;"></div>
+            </div>
+        </section> -->
+
+        <section>
+            <h2 class="section-title">Маленькі деталі</h2>
+            <p class="section-desc">Кілька теплих прохань, які допоможуть зробити свято затишним, легким і сповненим яскравих спогадів.</p>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Попередній слайд">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        
+                        <div class="carousel-slide">
+                            <div class="detail-card">
+                                <i class="fa-regular fa-face-smile detail-icon"></i>
+                                <h3>Ваш настрій</h3>
+                                <p>Ваш настрій — наш найкращий декор. Принесіть найяскравішу усмішку, відкриті серця та нестримний танцювальний запал!</p>
+                            </div>
+                        </div>
+
+                        <div class="carousel-slide">
+                            <div class="detail-card">
+                                <i class="fa-solid fa-gift detail-icon"></i>
+                                <h3>Про подарунки</h3>
+                                <p>Будь ласка, утримайтеся від живих квітів — вони швидко в'януть. Замість букетів ми будемо щиро раді пляшці вашого улюбленого напою або цікавій книзі для нашої бібліотеки.</p>
+                            </div>
+                        </div>
+
+                        <div class="carousel-slide">
+                            <div class="detail-card">
+                                <i class="fa-solid fa-camera detail-icon"></i>
+                                <h3>Ловіть моменти</h3>
+                                <p>Фотографуйте, знімайте відео, ловіть найщиріші емоції та сміливо діліться ними в соцмережах! Нам буде неймовірно цінно побачити це свято вашими очима.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button class="carousel-btn next-btn" id="nextBtn" aria-label="Наступний слайд">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="carousel-dots" id="carouselDots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
             </div>
         </section>
 
@@ -476,7 +877,7 @@
         </footer>
     </div>
     </div> <script>
-        const weddingDate = new Date(2027, 4, 22, 16, 0, 0).getTime();
+        const weddingDate = new Date(2027, 4, 22, 13, 0, 0).getTime();
 
         const updateCountdown = setInterval(function() {
             const now = new Date().getTime();
@@ -497,6 +898,87 @@
                 document.getElementById("countdown").innerHTML = "<h3 style='font-family: var(--font-accent); color: var(--sage-main); font-size: 2rem;'>Цей неймовірний день настав!</h3>";
             }
         }, 1000);
+
+        // Логіка для каруселі карток
+        const track = document.getElementById('carouselTrack');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        function updateCarousel(index) {
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            let index = currentIndex - 1;
+            if (index < 0) index = totalSlides - 1;
+            updateCarousel(index);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            let index = currentIndex + 1;
+            if (index >= totalSlides) index = 0;
+            updateCarousel(index);
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const index = parseInt(e.target.dataset.index);
+                updateCarousel(index);
+            });
+        });
+
+        // Підтримка свайпів на телефонах
+        let startX = 0;
+        let endX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        track.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 40) {
+                if (diff > 0) {
+                    let index = currentIndex + 1;
+                    if (index >= totalSlides) index = 0;
+                    updateCarousel(index);
+                } else {
+                    let index = currentIndex - 1;
+                    if (index < 0) index = totalSlides - 1;
+                    updateCarousel(index);
+                }
+            }
+        });
+
+        // Почергова поява подій при скролі
+        const timelineContainer = document.querySelector('.timeline');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        if (timelineContainer && timelineItems.length > 0) {
+            const timelineObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    timelineItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('show');
+                        }, index * 220); // плавна затримка між рядками
+                    });
+                    timelineObserver.disconnect();
+                }
+            }, { threshold: 0.15 });
+
+            timelineObserver.observe(timelineContainer);
+        }
     </script>
 </body>
 </html>
